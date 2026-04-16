@@ -1,1 +1,35 @@
+O sistema precisa simular dois portões que funcionam a partir do acionamento de botões, onde os portões
+são servos motores.
+Os botões controlam: abrir cada lado, abrir os dois juntos e fechar os dois.
+No total são quatro botôes, um para abrir o lado esquerdo, um para o direito e um para os dois, e um para fechar os dois.
+São 6 leds.
+2 para o portão esquerdo, 2 para o portão direito, e dois para todo o sistemas.
+
+Os LEDs mostram o estado:
+Vermelho = fechado -  um em cada lado
+Verde = aberto - um em cada lado
+Amarelo = em movimento ou só um lado aberto - 1 só, para os dois lados
+Azul = totalmente aberto - um só, para os dois lados
+
+
+Colocar no Tinkercad:
+Arduino
+2 servos
+4 botões
+6 LEDs
+resistores
+Ligar os servos nos pinos do Arduino.
+Ligar os botões com resistor pull-down.
+Ligar os LEDs com resistor.
+Fazer o código:
+Ler os botões
+Mover os servos (abrir/fechar)
+Controlar os LEDs
+Testar:
+Abrir lado esquerdo
+Abrir lado direito
+Abrir os dois
+Fechar tudo
+Conferir se os LEDs mostram o estado certo.
+
 
