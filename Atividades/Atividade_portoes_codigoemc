@@ -1,0 +1,119 @@
+#include <Servo.h>
+
+Servo servoEsq;
+Servo servoDir;
+
+int b1=13, b2=2, b3=12, b4=3;
+
+int ledVerdEsq=10;
+int ledVermEsq=11;
+int ledAma=8, ledAzul=7;
+int ledVermDir=5;
+int ledVerdDir=4;
+
+int angulo;
+
+bool esqAberto = false;
+bool dirAberto = false;
+
+void setup()
+{
+  pinMode(b1 ,INPUT);
+  pinMode(b2 ,INPUT);
+  pinMode(b3 ,INPUT);
+  pinMode(b4 ,INPUT);
+
+  pinMode(ledVerdEsq ,OUTPUT);
+  pinMode(ledVermEsq ,OUTPUT);
+  pinMode(ledAma ,OUTPUT);
+  pinMode(ledAzul ,OUTPUT);
+  pinMode(ledVermDir ,OUTPUT);
+  pinMode(ledVerdDir ,OUTPUT);
+
+  servoEsq.attach(9);
+  servoDir.attach(6);
+
+  servoEsq.write(0);
+  servoDir.write(0);
+}
+
+void loop()
+{
+  if (digitalRead(b1) == HIGH && esqAberto == false)
+  {
+    digitalWrite(ledAma, HIGH);
+
+    for (angulo = 0; angulo <= 90; angulo++)
+    {
+      servoEsq.write(angulo);
+      delay(20);
+    }
+
+    esqAberto = true;
+  }
+
+  if (digitalRead(b2) == HIGH && dirAberto == false)
+  {
+    digitalWrite(ledAma, HIGH);
+
+    for (angulo = 0; angulo <= 90; angulo++)
+    {
+      servoDir.write(angulo);
+      delay(20);
+    }
+
+    dirAberto = true;
+  }
+
+  if (digitalRead(b3) == HIGH)
+  {
+    digitalWrite(ledAma, HIGH);
+
+    for (angulo = 0; angulo <= 90; angulo++)
+    {
+      servoEsq.write(angulo);
+      servoDir.write(angulo);
+      delay(20);
+    }
+
+    esqAberto = true;
+    dirAberto = true;
+  }
+
+  if (digitalRead(b4) == HIGH)
+  {
+    digitalWrite(ledAma, HIGH);
+
+    for (angulo = 90; angulo >= 0; angulo--)
+    {
+      servoEsq.write(angulo);
+      servoDir.write(angulo);
+      delay(20);
+    }
+
+    esqAberto = false;
+    dirAberto = false;
+  }
+
+  digitalWrite(ledVermEsq, !esqAberto);
+  digitalWrite(ledVerdEsq, esqAberto);
+
+  digitalWrite(ledVermDir, !dirAberto);
+  digitalWrite(ledVerdDir, dirAberto);
+
+  if (esqAberto && dirAberto)
+  {
+    digitalWrite(ledAzul, HIGH);
+    digitalWrite(ledAma, LOW);
+  }
+  else if (!esqAberto && !dirAberto)
+  {
+    digitalWrite(ledAzul, LOW);
+    digitalWrite(ledAma, LOW);
+  }
+  else
+  {
+    digitalWrite(ledAzul, LOW);
+    digitalWrite(ledAma, HIGH);
+  }
+}
