@@ -1,0 +1,50 @@
+int ledVerd=10, ledAma=9, ledVerm=8;
+int botao=4;
+int ledA1=7, ledA2=6, ledA3=5;
+int pot1Tempo = A0, pot2Int = A1; 
+void setup()
+{
+ pinMode(ledVerd, OUTPUT);
+ pinMode(ledAma, OUTPUT);
+ pinMode(ledVerm, OUTPUT);
+ pinMode(ledA1, OUTPUT);
+ pinMode(ledA2, OUTPUT);
+ pinMode(ledA3, OUTPUT);
+ pinMode(botao, INPUT);
+ digitalWrite(ledVerm, HIGH);
+}
+
+void loop()
+{
+  int valorPOT1 = analogRead(pot1Tempo);
+  int tempo = map(valorPOT1, 0, 1023, 1, 10);
+  int valorPOT2 = analogRead(pot2Int);
+  if (valorPOT2 <= 341){
+    	digitalWrite(ledA1, HIGH);
+  		digitalWrite(ledA2, LOW);
+  		digitalWrite(ledA3, LOW);}
+  if (valorPOT2 > 341 && valorPOT2 <= 682){
+    	digitalWrite(ledA1, HIGH);
+    	digitalWrite(ledA2, HIGH);
+  		digitalWrite(ledA3, LOW);}
+  if (valorPOT2 > 682){
+    	digitalWrite(ledA1, HIGH);
+    	digitalWrite(ledA2, HIGH);
+    	digitalWrite(ledA3, HIGH);} 
+  
+  // BOTÃO CLICADO
+  if (digitalRead(botao) == HIGH){
+    digitalWrite(ledVerm, LOW);
+    digitalWrite(ledVerd, LOW);
+    digitalWrite(ledAma, HIGH);
+    delay(tempo*1000);
+    digitalWrite(ledA1, LOW);
+    digitalWrite(ledA2, LOW);
+    digitalWrite(ledA3, LOW);
+    digitalWrite(ledAma, LOW);
+    digitalWrite(ledVerd, HIGH);
+    delay(3000);
+    digitalWrite(ledVerm, HIGH);
+    digitalWrite(ledVerd, LOW);
+  }
+}
